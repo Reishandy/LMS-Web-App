@@ -52,13 +52,19 @@
                         Telah berhasil mendaftar. Silahkan masuk.
                     </div>
                     <?php
+                } elseif (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+                    ?>
+                    <div class="alert alert-success" role="alert">
+                        Anda telah berhasil keluar.
+                    </div>
+                    <?php
                 }
                 ?>
 
                 <div class="row">
                     <div class="col-4">
                         <div class="form-floating">
-                            <select class="form-select form-select-lg" aria-label="Default select example" id="account"
+                            <select class="form-select" aria-label="Default select example" id="account"
                                     name="account" required>
                                 <option selected value="student">Mahasiswa</option>
                                 <option value="professor">Dosen</option>

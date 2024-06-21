@@ -7,7 +7,7 @@ $nim_nip = $_POST['nim-nip'];
 $password = $_POST['password'];
 
 // Check if the NIM/NIP is already registered
-$query_check = "SELECT * FROM users WHERE nim_nip = ?";
+$query_check = "SELECT * FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($query_check);
 $stmt->bind_param("s", $nim_nip);
 $stmt->execute();
@@ -15,11 +15,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 if ($result->num_rows == 0) {
     echo '<script>window.location.replace("../../public/auth/login.php?error=username") </script>';
+    $stmt->close();
     exit();
 }
 
 // Verify the password
 $hashed_password = $result->fetch_assoc()['password'];
+$stmt->close();
 if (!password_verify($password, $hashed_password)) {
     echo '<script>window.location.replace("../../public/auth/login.php?error=password") </script>';
     exit();

@@ -1,14 +1,24 @@
 // Clear url params
 window.history.replaceState({}, document.title, "login.php");
 
-// Change to register page
-let register = document.getElementsByTagName('h5')[0];
-register.addEventListener('click', () => {
-    leave(document.getElementsByClassName('div-form'));
-    setTimeout(() => {
-        window.location.href = 'register.php';
-    }, 500);
-});
+// Onresize
+window.onresize = () => {
+    change_layout()
+}
+
+function change_layout() {
+    let d_flex = document.getElementsByClassName('d-flex');
+
+    if (window.innerHeight < 1001) {
+        d_flex[0].classList.remove('vh-100');
+        d_flex[0].classList.add('m-2');
+    } else {
+        d_flex[0].classList.add('vh-100');
+        d_flex[0].classList.remove('m-2');
+    }
+}
+
+change_layout()
 
 // Change form type for professor
 window.addEventListener('pageshow', () => {
@@ -49,4 +59,13 @@ form_login.addEventListener('submit', (e) => {
     } else {
         form_login.classList.add('was-validated');
     }
+});
+
+// Change to register page
+let register = document.getElementsByTagName('h5')[0];
+register.addEventListener('click', () => {
+    leave(document.getElementsByClassName('div-form'));
+    setTimeout(() => {
+        window.location.href = 'register.php';
+    }, 500);
 });

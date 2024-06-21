@@ -38,7 +38,7 @@
                 ?>
 
                 <div class="form-floating">
-                    <select class="form-select form-select-lg" aria-label="Default select example" id="account"
+                    <select class="form-select" aria-label="Default select example" id="account"
                             name="account" required>
                         <option selected value="student">Mahasiswa</option>
                         <option value="professor">Dosen</option>
@@ -46,8 +46,8 @@
                     <label for="account">Akun</label>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-4">
+                <div class="row mt-4 row-rem">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="nim-nip" name="nim-nip"
                                    placeholder="NIM / NIP" pattern="^[0-9]{11}$$"
@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="name" name="name"
                                    placeholder="Name" required>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
                             <input type="email" class="form-control" id="email" name="email"
                                    placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -83,10 +83,10 @@
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-4">
+                <div class="row mt-4 row-rem">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
-                            <select class="form-select form-select-lg" aria-label="Default select example" id="prodi"
+                            <select class="form-select" aria-label="Default select example" id="prodi"
                                     name="prodi" required>
                                 <option selected value="ilkom">Ilmu Komputer</option>
                                 <option value="tekin">Teknik Industri</option>
@@ -96,9 +96,9 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
-                            <select class="form-select form-select-lg" aria-label="Default select example" id="class"
+                            <select class="form-select" aria-label="Default select example" id="class"
                                     name="class" required>
                                 <option selected value="a">A</option>
                                 <option value="b">B</option>
@@ -107,9 +107,9 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-4 col-4-rem">
                         <div class="form-floating">
-                            <select class="form-select form-select-lg" aria-label="Default select example" id="year"
+                            <select class="form-select" aria-label="Default select example" id="year"
                                     name="year" required>
                                 <option selected value="2023">2023</option>
                                 <option value="2022">2022</option>
@@ -121,8 +121,8 @@
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="col-6">
+                <div class="row mt-4 row-rem">
+                    <div class="col-6 col-6-rem">
                         <div class="form-floating">
                             <input type="password" class="form-control" id="password" name="password"
                                    placeholder="Password" pattern=".{8,}" required>
@@ -133,12 +133,12 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 col-6-rem">
                         <div class="form-floating">
                             <input type="password" class="form-control" id="password-confirm"
                                    name="password-confirm"
                                    placeholder="Confirm Password" required>
-                            <label for="password-confirm">Ulangi password</label>
+                            <label for="password-confirm">Konfirmasi password</label>
                             <div class="invalid-feedback">
                                 Password tidak sama.
                             </div>

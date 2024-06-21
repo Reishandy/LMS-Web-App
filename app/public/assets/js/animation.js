@@ -36,3 +36,14 @@ function leave(element) {
         easing: 'easeInBack'
     })
 }
+
+function card(element) {
+    anime({
+        targets: element,
+        scale: [0.5, 1],
+        opacity: 1,
+        duration: 300,
+        easing: 'easeOutElastic(1, .8)',
+        delay: anime.stagger(100)
+    });
+}

@@ -1,0 +1,146 @@
+body {
+    background: url("../img/bg.webp") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
+    scrollbar-width: thin;
+    scrollbar-color: #4770d1 #ebeffa;
+}
+
+/* For Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ebeffa;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #4770d1;
+    border-radius: 20px;
+    border: 3px solid #ebeffa;
+}
+
+.div-nav {
+    background-color: #ebeffa;
+    border-radius: 10px;
+    border: 3px solid black;
+    box-shadow: 0 0 200px 10px rgba(0, 0, 0, 0.3);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    opacity: 0;
+}
+
+.div-nav h1 {
+    font-size: 4em;
+    font-weight: 800;
+
+    color: #4770d1 !important;
+}
+
+.div-nav a {
+    font-size: 1.2em !important;
+    color: #4770d1 !important;
+}
+
+.div-nav .btn-outline-danger {
+    font-size: 1.2em;
+    margin-right: 2em;
+}
+
+.btn-primary {
+    background-color: #4770d1;
+    border-color: #4770d1;
+
+    color: #ebeffa;
+    font-size: 1.5em;
+
+    margin-right: 1em;
+}
+
+.btn-primary:hover {
+    background-color: #ebeffa;
+
+    color: #4770d1;
+}
+
+.div-body {
+    background-color: #ebeffa;
+    border-radius: 10px;
+    border: 3px solid black;
+    box-shadow: 0 0 200px 10px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+    opacity: 0;
+}
+
+.div-details {
+    background-color: #4770d1;
+    border-radius: 10px;
+
+    color: #ebeffa;
+    text-align: left;
+}
+
+.div-details h1 {
+    font-size: 4em;
+    font-weight: 700;
+}
+
+.div-card {
+    border-radius: 10px;
+    border: 3px solid black;
+
+    overflow: hidden;
+    opacity: 0;
+}
+
+.div-card h3 {
+    font-weight: 600;
+}
+
+.div-card .card-details {
+    background-color: #4770d1;
+    color: #ebeffa;
+    box-shadow: 0 0 20px 30px #4770d1
+}
+
+.div-card .btn {
+    flex-grow: 1;
+    margin: 0.5em;
+    font-size: 1em;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .div-nav .btn-outline-danger {
+        margin-bottom: 1em;
+    }
+
+    .div-details h1 {
+        font-size: 2em;
+    }
+
+    .div-details h2 {
+        font-size: 1em;
+    }
+
+    .div-details h4 {
+        font-size: 0.8em;
+    }
+}
