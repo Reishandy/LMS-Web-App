@@ -29,6 +29,10 @@ body {
     border: 3px solid #ebeffa;
 }
 
+.modal-dialog .btn {
+    font-size: 1em;
+}
+
 .div-nav {
     background-color: #ebeffa;
     border-radius: 10px;

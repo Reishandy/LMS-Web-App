@@ -19,7 +19,6 @@
           rel="stylesheet">
 </head>
 <body>
-
 <!-- Check login state -->
 <?php
 session_start();
@@ -64,6 +63,99 @@ $year = $user['year'];
 
 ?>
 
+<!-- === MODAL === -->
+<div class="modal fade" id="modal-logout" tabindex="-1" aria-labelledby="modal-logout-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-logout-label">Konfirmasi keluar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                Apakah anda yakin ingin keluar?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                <button id="logout" type="button" class="btn btn-outline-danger">Keluar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-add-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-add-label">Buat kelas baru</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="../../logic/course/add.php" method="POST" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="owner_id" value="<?php echo $id ?>">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="title" name="title"
+                               placeholder="Judul" required>
+                        <label for="title">Nama kelas</label>
+                        <div class="invalid-feedback">
+                            Nama kelas tidak boleh kosong.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="description" name="description"
+                                  placeholder="Deskripsi" required style="min-height: 100%"></textarea>
+                        <label for="description">Deskripsi</label>
+                        <div class="invalid-feedback">
+                            Deskripsi tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Buat</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-join" tabindex="-1" aria-labelledby="modal-join-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-join-label">Bergabung ke kelas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="../../logic/course/enroll.php" method="POST" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" value="<?php echo $id ?>">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="id" name="id"
+                               placeholder="ID" pattern="[a-zA-Z0-9]{8}" required>
+                        <label for="id">ID kelas</label>
+                        <div class="invalid-feedback">
+                            ID kelas tidak valid.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Gabung</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- === NAVBAR === -->
 <div class="div-nav m-3 p-3">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -86,18 +178,26 @@ $year = $user['year'];
                     </li>
                 </ul>
 
-                <button id="logout" class="btn btn-outline-danger">Keluar</button>
-                <button class="btn btn-primary">Tambah kelas baru</button>
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-logout">Keluar</button>
+                <?php
+                if ($type == "professor") {
+                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">Buat kelas baru</button>';
+                } else {
+                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-join">Gabung kelas</button>';
+                }
+                ?>
             </div>
         </div>
     </nav>
 </div>
 
+<!-- === BODY === -->
 <div class="div-body m-4 p-3">
     <!-- TODO: Add class info statistics and such -->
     <!-- TODO: Add info in each card like enrolled student count, materials count, etc... -->
     <!-- TODO: Keep the search feature -->
 
+    <!-- === ACCOUNT DETAILS === -->
     <div class="div-details m-1 p-4">
         <div class="row">
             <div class="col-7">
@@ -119,6 +219,7 @@ $year = $user['year'];
         </div>
     </div>
 
+    <!-- === COURSES === -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <?php
         if ($type == "professor") {
@@ -181,6 +282,8 @@ $year = $user['year'];
 
 
 <!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
