@@ -97,9 +97,9 @@ $year = $user['year'];
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="title" name="title"
-                               placeholder="Judul" required>
-                        <label for="title">Nama kelas</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               placeholder="Nama" required>
+                        <label for="name">Nama kelas</label>
                         <div class="invalid-feedback">
                             Nama kelas tidak boleh kosong.
                         </div>
@@ -137,9 +137,9 @@ $year = $user['year'];
                     <input type="hidden" name="user_id" value="<?php echo $id ?>">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="id" name="id"
+                        <input type="text" class="form-control" id="course-id" name="course_id"
                                placeholder="ID" pattern="[a-zA-Z0-9]{8}" required>
-                        <label for="id">ID kelas</label>
+                        <label for="course-id">ID kelas</label>
                         <div class="invalid-feedback">
                             ID kelas tidak valid.
                         </div>
@@ -196,6 +196,28 @@ $year = $user['year'];
     <!-- TODO: Add class info statistics and such -->
     <!-- TODO: Add info in each card like enrolled student count, materials count, etc... -->
     <!-- TODO: Keep the search feature -->
+
+    <?php
+    if (isset($_GET['add'])) {
+        ?>
+        <div class="alert alert-success" role="alert">
+            Kelas berhasil dibuat dengan id <?php echo $_GET['add'] ?>
+        </div>
+        <?php
+    } elseif (isset($_GET['enroll'])) {
+        ?>
+        <div class="alert alert-success" role="alert">
+            Berhasil bergabung dengan kelas id <?php echo $_GET['enroll'] ?>
+        </div>
+        <?php
+    } elseif (isset($_GET['enroll_error'])) {
+        ?>
+        <div class="alert alert-danger" role="alert">
+            Gagal bergabung ke kelas, <?php echo $_GET['enroll_error'] ?>
+        </div>
+        <?php
+    }
+    ?>
 
     <!-- === ACCOUNT DETAILS === -->
     <div class="div-details m-1 p-4">
