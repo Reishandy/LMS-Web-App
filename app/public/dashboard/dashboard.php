@@ -98,10 +98,10 @@ $year = $user['year'];
 
                     <div class="form-floating">
                         <input type="text" class="form-control" id="name" name="name"
-                               placeholder="Nama" required>
+                               placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="name">Nama kelas</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak boleh kosong.
+                            Nama kelas tidak valid.
                         </div>
                     </div>
 
@@ -245,9 +245,9 @@ $year = $user['year'];
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <?php
         if ($type == "professor") {
-            $query = "SELECT course_id, course_name, description, name AS owner_name FROM courses JOIN users ON courses.owner_id = users.user_id WHERE owner_id = ?";
+            $query = "SELECT course_id, course_name, description, name AS owner_name FROM courses JOIN users ON courses.owner_id = users.user_id WHERE owner_id = ? ORDER BY date_created DESC";
         } else {
-            $query = "SELECT courses.course_id, course_name, description, name AS owner_name FROM courses JOIN enrollments ON courses.course_id = enrollments.course_id JOIN users ON courses.owner_id = users.user_id WHERE enrollments.user_id = ?";
+            $query = "SELECT courses.course_id, course_name, description, name AS owner_name FROM courses JOIN enrollments ON courses.course_id = enrollments.course_id JOIN users ON courses.owner_id = users.user_id WHERE enrollments.user_id = ? ORDER BY date_created DESC";
         }
 
         $stmt = $conn->prepare($query);

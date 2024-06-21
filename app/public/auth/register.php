@@ -62,7 +62,7 @@
                     <div class="col-4 col-4-rem">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="name" name="name"
-                                   placeholder="Name" required>
+                                   placeholder="Name" pattern=".{1,50}$" required>
                             <label for="name">Nama</label>
                             <div class="invalid-feedback">
                                 Masukkan nama lengkap.
