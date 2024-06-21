@@ -37,23 +37,10 @@ if ($_SESSION['expire'] < time()) {
 $id = $_SESSION['id'];
 $type = $_SESSION['type'];
 
-require_once "../../logic/connection.php";
+require_once "../../logic/dashboard/dashboard.php";
 
 // Get user data
-$query = "SELECT * FROM users WHERE user_id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows == 0) {
-    session_destroy();
-    echo '<script>window.location.replace("../auth/login.php?error=username") </script>';
-    exit();
-}
-
-$user = $result->fetch_assoc();
-$stmt->close();
+$user = get_user_data($id);
 
 $name = $user['name'];
 $email = $user['email'];
@@ -92,7 +79,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="../../logic/course/add.php" method="POST" class="needs-validation" novalidate>
+            <form id="form-add" action="../../logic/course/add.php" method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
 
@@ -107,7 +94,7 @@ $year = $user['year'];
 
                     <div class="form-floating mt-3">
                         <textarea class="form-control" id="description" name="description"
-                                  placeholder="Deskripsi" required style="min-height: 100%"></textarea>
+                                  placeholder="Deskripsi" required></textarea>
                         <label for="description">Deskripsi</label>
                         <div class="invalid-feedback">
                             Deskripsi tidak boleh kosong.
@@ -132,7 +119,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form action="../../logic/course/enroll.php" method="POST" class="needs-validation" novalidate>
+            <form id="form-join" action="../../logic/course/enroll.php" method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="user_id" value="<?php echo $id ?>">
 
@@ -155,6 +142,70 @@ $year = $user['year'];
     </div>
 </div>
 
+<div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="modal-delete-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-delete-label">Konfirmasi hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                Apakah anda yakin ingin menghapus kelas ini? semua data yang terkait akan ikut terhapus.
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+
+                <form id="form-delete" action="../../logic/course/delete.php" method="POST">
+                    <input type="hidden" name="course_id" id="course-id-delete">
+                    <button id="delete" type="submit" class="btn btn-outline-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-edit" tabindex="-1" aria-labelledby="modal-edit-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-edit-label">Edit </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="form-add" action="../../logic/course/edit.php" method="POST" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="course_id" id="course-id-edit">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="edit-name" name="name"
+                               placeholder="Nama" pattern=".{1,255}$" required>
+                        <label for="edit-name">Nama kelas</label>
+                        <div class="invalid-feedback">
+                            Nama kelas tidak valid.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="edit-description" name="description"
+                                  placeholder="Deskripsi" required></textarea>
+                        <label for="edit-description">Deskripsi</label>
+                        <div class="invalid-feedback">
+                            Deskripsi tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- === NAVBAR === -->
 <div class="div-nav m-3 p-3">
     <nav class="navbar navbar-expand-lg navbar-light">
@@ -171,14 +222,15 @@ $year = $user['year'];
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://reishandy.github.io/">About me</a>
+                        <a class="nav-link" href="https://reishandy.github.io/">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/Reishandy/LMS-Web-App">Github Repo</a>
+                        <a class="nav-link" href="https://github.com/Reishandy/LMS-Web-App">Repository</a>
                     </li>
                 </ul>
 
-                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-logout">Keluar</button>
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-logout">Keluar
+                </button>
                 <?php
                 if ($type == "professor") {
                     echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add">Buat kelas baru</button>';
@@ -244,26 +296,17 @@ $year = $user['year'];
     <!-- === COURSES === -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <?php
-        if ($type == "professor") {
-            $query = "SELECT course_id, course_name, description, name AS owner_name FROM courses JOIN users ON courses.owner_id = users.user_id WHERE owner_id = ? ORDER BY date_created DESC";
-        } else {
-            $query = "SELECT courses.course_id, course_name, description, name AS owner_name FROM courses JOIN enrollments ON courses.course_id = enrollments.course_id JOIN users ON courses.owner_id = users.user_id WHERE enrollments.user_id = ? ORDER BY date_created DESC";
+        $courses = get_courses($type, $id);
+
+        if (empty($courses)) {
+            echo '<h3 class="text-start m-5">Tidak ada kelas</h3>';
         }
 
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 0) {
-            echo '<h3 class="text-center">Tidak ada kelas</h3>';
-        }
-
-        while ($row = $result->fetch_assoc()) {
-            $course_id = $row['course_id'];
-            $course_name = $row['course_name'];
-            $course_description = $row['description'];
-            $owner_name = $row['owner_name'];
+        foreach ($courses as $course) {
+            $course_id = $course['course_id'];
+            $course_name = $course['course_name'];
+            $course_description = $course['description'];
+            $owner_name = $course['owner_name'];
 
             ?>
             <div class="p-3">
@@ -286,8 +329,8 @@ $year = $user['year'];
                                 <button class="btn btn-primary">Masuk</button>
                                 <?php
                                 if ($type == "professor") {
-                                    echo '<button class="btn btn-primary">Edit</button>';
-                                    echo '<button class="btn btn-danger">Hapus</button>';
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
+                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '">Hapus</button>';
                                 }
 
                                 ?>

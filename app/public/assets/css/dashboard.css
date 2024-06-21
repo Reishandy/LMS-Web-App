@@ -33,6 +33,10 @@ body {
     font-size: 1em;
 }
 
+.modal-dialog {
+    overflow: hidden;
+}
+
 .div-nav {
     background-color: #ebeffa;
     border-radius: 10px;
