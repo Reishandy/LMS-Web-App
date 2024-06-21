@@ -268,6 +268,24 @@ $year = $user['year'];
             Gagal bergabung ke kelas, <?php echo $_GET['enroll_error'] ?>
         </div>
         <?php
+    }  elseif (isset($_GET['delete'])) {
+        ?>
+        <div class="alert alert-success" role="alert">
+            Kelas <?php echo $_GET['delete'] ?> berhasil dihapus.
+        </div>
+        <?php
+    } elseif (isset($_GET['edit'])) {
+        ?>
+        <div class="alert alert-success" role="alert">
+            Kelas <?php echo $_GET['edit'] ?> berhasil diubah.
+        </div>
+        <?php
+    } elseif (isset($_GET['error'])) {
+        ?>
+        <div class="alert alert-danger" role="alert">
+            Terjadi kesalahan: <?php echo $_GET['error'] ?>
+        </div>
+        <?php
     }
     ?>
 
