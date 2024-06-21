@@ -245,10 +245,6 @@ $year = $user['year'];
 
 <!-- === BODY === -->
 <div class="div-body m-4 p-3">
-    <!-- TODO: Add class info statistics and such -->
-    <!-- TODO: Add info in each card like enrolled student count, materials count, etc... -->
-    <!-- TODO: Keep the search feature -->
-
     <?php
     if (isset($_GET['add'])) {
         ?>
@@ -344,7 +340,7 @@ $year = $user['year'];
                         </div>
                         <div class="row">
                             <div class="d-flex justify-content-evenly align-items-center">
-                                <button class="btn btn-primary">Masuk</button>
+                                <a href="class.php? <?php echo $course_id ?>" class="btn btn-primary">Masuk</a>
                                 <?php
                                 if ($type == "professor") {
                                     echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
@@ -374,6 +370,7 @@ $year = $user['year'];
         integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../assets/js/dashboard.js"></script>
+<script src="../assets/js/dashboard_shared.js"></script>
 <script src="../assets/js/animation.js"></script>
 </body>
 </html>
