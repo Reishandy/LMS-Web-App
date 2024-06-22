@@ -340,7 +340,7 @@ $year = $user['year'];
                         </div>
                         <div class="row">
                             <div class="d-flex justify-content-evenly align-items-center">
-                                <a href="class.php? <?php echo $course_id ?>" class="btn btn-primary">Masuk</a>
+                                <a href="course.php?id=<?php echo $course_id ?>" class="btn btn-primary">Masuk</a>
                                 <?php
                                 if ($type == "professor") {
                                     echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
@@ -358,6 +358,14 @@ $year = $user['year'];
         ?>
     </div>
 </div>
+
+<footer>
+    <div class="div-body m-3 p-3">
+        All rights reserved
+        <br>
+        &copy; 2024 Reishandy
+    </div>
+</footer>
 
 
 <!-- Scripts -->

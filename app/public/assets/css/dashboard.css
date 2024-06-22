@@ -33,8 +33,10 @@ body {
     font-size: 1em;
 }
 
-.modal-dialog {
+.modal-content {
     overflow: hidden;
+    border-radius: 10px;
+    border: 3px solid black;
 }
 
 .div-nav {
@@ -59,12 +61,11 @@ body {
 
 .div-nav a {
     font-size: 1.2em !important;
-    color: #4770d1 !important;
 }
 
 .div-nav .btn-outline-danger {
     font-size: 1.2em;
-    margin-right: 2em;
+    margin-right: 1em;
 }
 
 .btn-primary {
@@ -75,6 +76,7 @@ body {
     font-size: 1.5em;
 
     margin-right: 1em;
+    margin-left: 1em;
 }
 
 .btn-primary:hover {
@@ -150,8 +152,8 @@ body {
 
 
 @media only screen and (max-width: 600px) {
-    .div-nav .btn-outline-danger {
-        margin-bottom: 1em;
+    .div-nav .btn {
+        margin: 1em 0 0;
     }
 
     .div-details h1 {
