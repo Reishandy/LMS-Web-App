@@ -122,7 +122,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-material" action="../../logic/course_inside/material-add.php" method="POST"
+            <form id="form-material" action="../../logic/course_inside/material_add.php" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -172,7 +172,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-assigment" action="../../logic/course_inside/assigment-add.php" method="POST"
+            <form id="form-assigment" action="../../logic/course_inside/assigment_add.php" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -227,11 +227,11 @@ $tests_count = $course_data['tests_count'];
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-assigment-label">Tambah tugas baru</h5>
+                <h5 class="modal-title" id="modal-edit-label">Tambah tes baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-test" action="../../logic/course_inside/test-add.php" method="POST"
+            <form id="form-test" action="../../logic/course_inside/test_add.php" method="POST"
                   class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -285,6 +285,180 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
+<div class="modal fade" id="modal-material-edit" tabindex="-1" aria-labelledby="modal-material-edit-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-material-label">Edit materi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="form-material-edit" action="../../logic/course_inside/material_edit.php" method="POST"
+                  class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="owner_id" value="<?php echo $id ?>">
+                    <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                    <input id="id-material-edit" type="hidden" name="material_id">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="modal-material-edit-name" name="name"
+                               placeholder="Nama" pattern=".{1,255}$" required>
+                        <label for="modal-material-edit-name">Nama materi</label>
+                        <div class="invalid-feedback">
+                            Nama kelas tidak valid.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="modal-material-edit-description" name="description"
+                                  placeholder="Deskripsi" required></textarea>
+                        <label for="modal-material-edit-description">Deskripsi</label>
+                        <div class="invalid-feedback">
+                            Deskripsi tidak boleh kosong.
+                        </div>
+                    </div>
+
+                    <h5 id="attachment-material" class="mt-3"></h5>
+
+                    <div class="form-group mt-3">
+                        <input type="file" class="form-control" id="modal-material-edit-file" name="file" accept="*/*">
+                        <label for="modal-material-edit-file">Ukuran maksimum 10MB</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-assigment-edit" tabindex="-1" aria-labelledby="modal-assigment-edit-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-assigment-edit-label">Edit tugas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="form-assigment-edit" action="../../logic/course_inside/assigment_edit.php" method="POST"
+                  class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="owner_id" value="<?php echo $id ?>">
+                    <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                    <input id="id-assigment-edit" type="hidden" name="assigment_id">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="modal-assigment-edit-name" name="name"
+                               placeholder="Nama" pattern=".{1,255}$" required>
+                        <label for="modal-assigment-edit-name">Nama tugas</label>
+                        <div class="invalid-feedback">
+                            Nama kelas tidak valid.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="modal-assigment-edit-description" name="description"
+                                  placeholder="Deskripsi" required></textarea>
+                        <label for="modal-assigment-edit-description">Deskripsi</label>
+                        <div class="invalid-feedback">
+                            Deskripsi tidak boleh kosong.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input type="datetime-local" class="form-control" id="modal-assigment-edit-due-date"
+                               name="due_date" required>
+                        <label for="modal-assigment-edit-due-date">Batas waktu</label>
+                        <div class="invalid-feedback">
+                            Batas waktu tidak valid.
+                        </div>
+                    </div>
+
+                    <h5 id="attachment-assigment" class="mt-3"></h5>
+
+                    <div class="form-group mt-3">
+                        <input type="file" class="form-control" id="modal-edit-assigment-file" name="file" accept="*/*">
+                        <label for="modal-material-edit-file">Ukuran maksimum 10MB</label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-test-edit" tabindex="-1" aria-labelledby="modal-test-edit-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-tes-edit-label">Edit tes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="form-test-edit" action="../../logic/course_inside/test_edit.php" method="POST"
+                  class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="owner_id" value="<?php echo $id ?>">
+                    <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                    <input id="id-test-edit" type="hidden" name="test_id">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="modal-test-edit-name" name="name"
+                               placeholder="Nama" pattern=".{1,255}$" required>
+                        <label for="modal-test-edit-name">Nama tes</label>
+                        <div class="invalid-feedback">
+                            Nama kelas tidak valid.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="modal-test-edit-description" name="description"
+                                  placeholder="Deskripsi" required></textarea>
+                        <label for="modal-test-edit-description">Deskripsi</label>
+                        <div class="invalid-feedback">
+                            Deskripsi tidak boleh kosong.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input type="url" class="form-control" id="modal-test-edit-link" name="link"
+                               placeholder="Link" required>
+                        <label for="modal-test-edit-link">Link</label>
+                        <div class="invalid-feedback">
+                            Link tidak valid.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mt-3">
+                        <input type="datetime-local" class="form-control" id="modal-test-edit-due-date" name="due_date"
+                               required>
+                        <label for="modal-test-edit-due-date">Batas waktu</label>
+                        <div class="invalid-feedback">
+                            Batas waktu tidak valid.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade" id="modal-details" tabindex="-1" aria-labelledby="modal-details-label"
      aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -299,6 +473,32 @@ $tests_count = $course_data['tests_count'];
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-delete-in" tabindex="-1" aria-labelledby="modal-delete-in-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-delete-in-label">Konfirmasi hapus</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                Apakah anda yakin ingin menghapus item ini?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+
+                <form id="form-delete" action="../../logic/course_inside/in_delete.php" method="POST">
+                    <input type="hidden" name="id" id="id-delete-in">
+                    <input type="hidden" name="type" id="type-delete-in">
+                    <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                    <button id="delete" type="submit" class="btn btn-outline-danger">Hapus</button>
+                </form>
             </div>
         </div>
     </div>
@@ -388,16 +588,27 @@ $tests_count = $course_data['tests_count'];
         foreach ($materials as $material) {
             $material['type'] = 'Materi';
             $material['color'] = '#FFD700';
+            $material['id'] = $material['material_id'];
+            $material['edit'] = 'modal-material-edit';
+            $material['link'] = '';
+            $material['due_date'] = '';
             $contents[] = $material;
         }
         foreach ($assignments as $assignment) {
             $assignment['type'] = 'Tugas';
             $assignment['color'] = '#20B2AA';
+            $assignment['id'] = $assignment['assignment_id'];
+            $assignment['edit'] = 'modal-assigment-edit';
+            $assignment['link'] = '';
             $contents[] = $assignment;
         }
         foreach ($tests as $test) {
             $test['type'] = 'Tes';
             $test['color'] = '#FFA07A';
+            $test['id'] = $test['test_id'];
+            $test['edit'] = 'modal-test-edit';
+            $test['file_path'] = '';
+            $test['file_name'] = '';
             $contents[] = $test;
         }
 
@@ -432,7 +643,7 @@ $tests_count = $course_data['tests_count'];
                                 <?php
                             } else {
                                 ?>
-                                <h5>Diunggah: <?php echo $content['date_uploaded'] ?></h5>
+                                <h5>Diunggah: <?php echo $content['date_created'] ?></h5>
                                 <?php
                             }
                             ?>
@@ -457,8 +668,20 @@ $tests_count = $course_data['tests_count'];
                                 <?php
                                 if ($type == "professor") {
                                     echo '<a href="course.php?id=' . $course_id . '" class="btn btn-primary">Submisi</a>';
-                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
-                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '">Hapus</button>';
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" 
+                                          data-bs-target="#'. $content['edit'] . '" 
+                                          data-bs-id="' . $content['id'] . '"
+                                          data-bs-type="' . $content['type'] . '"
+                                          data-bs-title="' . $content['title'] . '" 
+                                          data-bs-description="' . $content['description'] . '"
+                                          data-bs-due-date="' . $content['due_date'] . '"
+                                          data-bs-file-path="' . $content['file_path'] . '"
+                                          data-bs-file-name="' . $content['file_name'] . '"
+                                          data-bs-link="' . $content['link'] . '">Edit</button>';
+                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-in" 
+                                          data-bs-id="' . $content['id'] . '"
+                                          data-bs-type="' . $content['type'] . '"
+                                          data-bs-title="' . $content['title'] . '">Hapus</button>';
                                 }
                                 ?>
                             </div>
