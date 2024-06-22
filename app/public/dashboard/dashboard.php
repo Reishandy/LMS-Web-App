@@ -324,7 +324,6 @@ $year = $user['year'];
 
             ?>
             <div class="p-3">
-                <!-- TODO: make card with stagger animation when visible -->
                 <div class="div-card p-3">
                     <h3><?php echo $course_name ?></h3>
                     <p><?php echo $course_description ?></p>

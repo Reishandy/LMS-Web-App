@@ -64,3 +64,45 @@ function get_class_data($class_id): false|array|null
 
     return $result->fetch_assoc();
 }
+
+function get_materials($course_id): false|array|null
+{
+    global $conn;
+
+    $query = "SELECT * FROM materials WHERE course_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $course_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function get_assignments($course_id): false|array|null
+{
+    global $conn;
+
+    $query = "SELECT * FROM assignments WHERE course_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $course_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function get_tests($course_id): false|array|null
+{
+    global $conn;
+
+    $query = "SELECT * FROM tests WHERE course_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $course_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}

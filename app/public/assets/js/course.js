@@ -9,8 +9,68 @@ back_button.addEventListener('click', (e) => {
     }, 500);
 });
 
+// Modal details
+let modal_details = document.getElementById('modal-details');
+modal_details.addEventListener('show.bs.modal', (e) => {
+    let button = e.relatedTarget;
+    let type = button.getAttribute('data-bs-type');
+    let title = button.getAttribute('data-bs-title');
+    let description = button.getAttribute('data-bs-description');
+    let due_date = button.getAttribute('data-bs-due-date');
+    let file_path = button.getAttribute('data-bs-file-path');
+    let file_name = button.getAttribute('data-bs-file-name');
+    let link = button.getAttribute('data-bs-link');
+
+    let modal_title = modal_details.querySelector('.modal-title');
+    let modal_body = modal_details.querySelector('.modal-body');
+    // clear modal body
+    modal_body.innerHTML = '';
+
+    modal_title.textContent = type + ': ' + title;
+
+    // add due date if available
+    if (due_date !== '') {
+        let due_date_element = document.createElement('h5');
+        due_date_element.textContent = 'Deadline: ' + due_date;
+        modal_body.appendChild(due_date_element);
+    }
+
+    // add description h5
+    let description_h5 = document.createElement('h5');
+    description_h5.textContent = 'Deskripsi:';
+    modal_body.appendChild(description_h5);
+
+    // add description
+    let description_element = document.createElement('p');
+    description_element.textContent = description;
+    modal_body.appendChild(description_element);
+
+    // Add attachment h5
+    let attachment_h5 = document.createElement('h5');
+    attachment_h5.textContent = 'Tautan:';
+    modal_body.appendChild(attachment_h5);
+
+
+    // Add file download button with name in the footer
+    if (file_path !== '') {
+        let file_element = document.createElement('a');
+        file_element.href = file_path;
+        file_element.download = file_name;
+        file_element.textContent = file_name;
+        modal_body.appendChild(file_element);
+    }
+
+    // Add link button in the footer
+    if (link !== '') {
+        let link_button = document.createElement('a');
+        link_button.href = link;
+        link_button.textContent = 'Link test';
+        modal_body.appendChild(link_button);
+    }
+});
+
 // Add material
-let form_add_material = document.getElementById('form-add-material');
+let form_add_material = document.getElementById('form-material');
 form_add_material.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -20,7 +80,7 @@ form_add_material.addEventListener('submit', (e) => {
         button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
 
         leave_page();
-        leave(document.getElementById('modal-add'));
+        leave(document.getElementById('modal-material'));
 
         setTimeout(() => {
             form_add_material.submit();
@@ -31,11 +91,11 @@ form_add_material.addEventListener('submit', (e) => {
 });
 
 // Add assignment
-let form_add_assignment = document.getElementById('form-add-assigment');
+let form_add_assignment = document.getElementById('form-assigment');
 form_add_assignment.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let dueDateInput = document.getElementById('modal-add-assigment-due-date');
+    let dueDateInput = document.getElementById('modal-assigment-due-date');
     let selectedDate = new Date(dueDateInput.value);
     let now = new Date();
 
@@ -55,7 +115,7 @@ form_add_assignment.addEventListener('submit', (e) => {
         button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
 
         leave_page();
-        leave(document.getElementById('modal-add'));
+        leave(document.getElementById('modal-assigment'));
 
         setTimeout(() => {
             form_add_assignment.submit();
@@ -66,11 +126,11 @@ form_add_assignment.addEventListener('submit', (e) => {
 });
 
 // Add test
-let form_add_test = document.getElementById('form-add-test');
+let form_add_test = document.getElementById('form-test');
 form_add_test.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let dueDateInput = document.getElementById('modal-add-test-due-date');
+    let dueDateInput = document.getElementById('modal-test-due-date');
     let selectedDate = new Date(dueDateInput.value);
     let now = new Date()
 
@@ -86,7 +146,7 @@ form_add_test.addEventListener('submit', (e) => {
 
     if (form_add_test.checkValidity()) {
         leave_page();
-        leave(document.getElementById('modal-add'));
+        leave(document.getElementById('modal-test'));
 
         setTimeout(() => {
             form_add_test.submit();

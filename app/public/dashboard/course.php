@@ -86,22 +86,22 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
-<div class="modal fade" id="modal-add-choice" tabindex="-1" aria-labelledby="modal-add-choice-label" aria-hidden="true">
+<div class="modal fade" id="modal-choice" tabindex="-1" aria-labelledby="modal-choice-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-add-choice-label">Tambah ke kelas</h5>
+                <h5 class="modal-title" id="modal-choice-label">Tambah ke kelas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body d-flex justify-content-evenly align-items-center">
-                <button class="btn btn-primary" data-bs-target="#modal-add-material" data-bs-toggle="modal"
+                <button class="btn btn-primary" data-bs-target="#modal-material" data-bs-toggle="modal"
                         data-bs-dismiss="modal">Materi
                 </button>
-                <button class="btn btn-primary" data-bs-target="#modal-add-assigment" data-bs-toggle="modal"
+                <button class="btn btn-primary" data-bs-target="#modal-assigment" data-bs-toggle="modal"
                         data-bs-dismiss="modal">Tugas
                 </button>
-                <button class="btn btn-primary" data-bs-target="#modal-add-test" data-bs-toggle="modal"
+                <button class="btn btn-primary" data-bs-target="#modal-test" data-bs-toggle="modal"
                         data-bs-dismiss="modal">Test
                 </button>
             </div>
@@ -113,47 +113,47 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
-<div class="modal fade" id="modal-add-material" tabindex="-1" aria-labelledby="modal-add-material-label"
+<div class="modal fade" id="modal-material" tabindex="-1" aria-labelledby="modal-material-label"
      aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-add-material-label">Tambah materi baru</h5>
+                <h5 class="modal-title" id="modal-material-label">Tambah materi baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-add-material" action="../../logic/course_inside/material-add.php" method="POST"
+            <form id="form-material" action="../../logic/course_inside/material-add.php" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
                     <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="modal-add-material-name" name="name"
+                        <input type="text" class="form-control" id="modal-material-name" name="name"
                                placeholder="Nama" pattern=".{1,255}$" required>
-                        <label for="modal-add-material-name">Nama materi</label>
+                        <label for="modal-material-name">Nama materi</label>
                         <div class="invalid-feedback">
                             Nama kelas tidak valid.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <textarea class="form-control" id="modal-add-material-description" name="description"
+                        <textarea class="form-control" id="modal-material-description" name="description"
                                   placeholder="Deskripsi" required></textarea>
-                        <label for="modal-add-material-description">Deskripsi</label>
+                        <label for="modal-material-description">Deskripsi</label>
                         <div class="invalid-feedback">
                             Deskripsi tidak boleh kosong.
                         </div>
                     </div>
 
                     <div class="form-group mt-3">
-                        <input type="file" class="form-control" id="modal-add-material-file" name="file" accept="*/*">
-                        <label for="modal-add-material-file">Ukuran maksimum 10MB</label>
+                        <input type="file" class="form-control" id="modal-material-file" name="file" accept="*/*">
+                        <label for="modal-material-file">Ukuran maksimum 10MB</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-add-choice"
+                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-choice"
                             data-bs-toggle="modal" data-bs-dismiss="modal">Kembali
                     </button>
                     <button type="submit" class="btn btn-primary">Tambah</button>
@@ -163,56 +163,56 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
-<div class="modal fade" id="modal-add-assigment" tabindex="-1" aria-labelledby="modal-add-assigment-label"
+<div class="modal fade" id="modal-assigment" tabindex="-1" aria-labelledby="modal-assigment-label"
      aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-add-assigment-label">Tambah tugas baru</h5>
+                <h5 class="modal-title" id="modal-assigment-label">Tambah tugas baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-add-assigment" action="../../logic/course_inside/assigment-add.php" method="POST"
+            <form id="form-assigment" action="../../logic/course_inside/assigment-add.php" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
                     <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="modal-add-assigment-name" name="name"
+                        <input type="text" class="form-control" id="modal-assigment-name" name="name"
                                placeholder="Nama" pattern=".{1,255}$" required>
-                        <label for="modal-add-assigment-name">Nama tugas</label>
+                        <label for="modal-assigment-name">Nama tugas</label>
                         <div class="invalid-feedback">
                             Nama kelas tidak valid.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <textarea class="form-control" id="modal-add-assigment-description" name="description"
+                        <textarea class="form-control" id="modal-assigment-description" name="description"
                                   placeholder="Deskripsi" required></textarea>
-                        <label for="modal-add-assigment-description">Deskripsi</label>
+                        <label for="modal-assigment-description">Deskripsi</label>
                         <div class="invalid-feedback">
                             Deskripsi tidak boleh kosong.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <input type="datetime-local" class="form-control" id="modal-add-assigment-due-date"
+                        <input type="datetime-local" class="form-control" id="modal-assigment-due-date"
                                name="due_date" required>
-                        <label for="modal-add-assigment-due-date">Batas waktu</label>
+                        <label for="modal-assigment-due-date">Batas waktu</label>
                         <div class="invalid-feedback">
                             Batas waktu tidak valid.
                         </div>
                     </div>
 
                     <div class="form-group mt-3">
-                        <input type="file" class="form-control" id="modal-add-assigment-file" name="file" accept="*/*">
-                        <label for="modal-add-material-file">Ukuran maksimum 10MB</label>
+                        <input type="file" class="form-control" id="modal-assigment-file" name="file" accept="*/*">
+                        <label for="modal-material-file">Ukuran maksimum 10MB</label>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-add-choice"
+                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-choice"
                             data-bs-toggle="modal" data-bs-dismiss="modal">Kembali
                     </button>
                     <button type="submit" class="btn btn-primary">Tambah</button>
@@ -222,52 +222,52 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
-<div class="modal fade" id="modal-add-test" tabindex="-1" aria-labelledby="modal-add-test-label"
+<div class="modal fade" id="modal-test" tabindex="-1" aria-labelledby="modal-test-label"
      aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal-add-assigment-label">Tambah tugas baru</h5>
+                <h5 class="modal-title" id="modal-assigment-label">Tambah tugas baru</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-add-test" action="../../logic/course_inside/test-add.php" method="POST"
+            <form id="form-test" action="../../logic/course_inside/test-add.php" method="POST"
                   class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
                     <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
 
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="modal-add-test-name" name="name"
+                        <input type="text" class="form-control" id="modal-test-name" name="name"
                                placeholder="Nama" pattern=".{1,255}$" required>
-                        <label for="modal-add-test-name">Nama tes</label>
+                        <label for="modal-test-name">Nama tes</label>
                         <div class="invalid-feedback">
                             Nama kelas tidak valid.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <textarea class="form-control" id="modal-add-test-description" name="description"
+                        <textarea class="form-control" id="modal-test-description" name="description"
                                   placeholder="Deskripsi" required></textarea>
-                        <label for="modal-add-test-description">Deskripsi</label>
+                        <label for="modal-test-description">Deskripsi</label>
                         <div class="invalid-feedback">
                             Deskripsi tidak boleh kosong.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <input type="url" class="form-control" id="modal-add-test-link" name="link"
+                        <input type="url" class="form-control" id="modal-test-link" name="link"
                                placeholder="Link" required>
-                        <label for="modal-add-test-link">Link</label>
+                        <label for="modal-test-link">Link</label>
                         <div class="invalid-feedback">
                             Link tidak valid.
                         </div>
                     </div>
 
                     <div class="form-floating mt-3">
-                        <input type="datetime-local" class="form-control" id="modal-add-test-due-date" name="due_date"
+                        <input type="datetime-local" class="form-control" id="modal-test-due-date" name="due_date"
                                required>
-                        <label for="modal-add-test-due-date">Batas waktu</label>
+                        <label for="modal-test-due-date">Batas waktu</label>
                         <div class="invalid-feedback">
                             Batas waktu tidak valid.
                         </div>
@@ -275,12 +275,31 @@ $tests_count = $course_data['tests_count'];
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-add-choice"
+                    <button type="button" class="btn btn-secondary" data-bs-target="#modal-choice"
                             data-bs-toggle="modal" data-bs-dismiss="modal">Kembali
                     </button>
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-details" tabindex="-1" aria-labelledby="modal-details-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-details-label">Detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
 </div>
@@ -313,7 +332,7 @@ $tests_count = $course_data['tests_count'];
                 <button id="button-back" type="button" class="btn btn-secondary">Kembali</button>
                 <?php
                 if ($type == "professor") {
-                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-add-choice">Tambah</button>';
+                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-choice">Tambah</button>';
                 }
                 ?>
             </div>
@@ -340,7 +359,6 @@ $tests_count = $course_data['tests_count'];
     ?>
 
     <!-- === CLASS DETAILS === -->
-    <!-- TODO: Rework -->
     <div class="div-details m-1 p-4">
         <div class="row">
             <div class="col-7">
@@ -360,6 +378,95 @@ $tests_count = $course_data['tests_count'];
     <!-- === COURSES === -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
         <!-- TODO: Rework, copy and modify from dashboard -->
+        <?php
+        $materials = get_materials($course_id);
+        $assignments = get_assignments($course_id);
+        $tests = get_tests($course_id);
+
+        // Combine into one array and assign type
+        $contents = [];
+        foreach ($materials as $material) {
+            $material['type'] = 'Materi';
+            $material['color'] = '#FFD700';
+            $contents[] = $material;
+        }
+        foreach ($assignments as $assignment) {
+            $assignment['type'] = 'Tugas';
+            $assignment['color'] = '#20B2AA';
+            $contents[] = $assignment;
+        }
+        foreach ($tests as $test) {
+            $test['type'] = 'Tes';
+            $test['color'] = '#FFA07A';
+            $contents[] = $test;
+        }
+
+        // sort by date newest first
+        usort($contents, function ($a, $b) {
+            return strtotime($b['date_created']) - strtotime($a['date_created']);
+        });
+
+        if (empty($contents)) {
+            echo '<h3 class="text-start m-5">Tidak ada materi, tugas, maupun tes</h3>';
+        }
+
+        foreach ($contents as $content) {
+            ?>
+            <div class="p-3">
+                <div class="div-card p-3">
+                    <div class="row">
+                        <div class="col-5"><h4 class="p-1" style="background-color: <?php echo $content['color'] ?>">
+                                <?php echo $content['type'] ?></h4></div>
+                    </div>
+                    <h3><?php echo $content['title'] ?></h3>
+                    <p><?php echo $content['description'] ?></p>
+
+                    <hr>
+
+                    <div class="col card-details">
+                        <div class="row">
+                            <?php
+                            if ($content['type'] == 'Tugas' || $content['type'] == 'Tes') {
+                                ?>
+                                <h5>Deadline: <?php echo $content['due_date'] ?></h5>
+                                <?php
+                            } else {
+                                ?>
+                                <h5>Diunggah: <?php echo $content['date_uploaded'] ?></h5>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content-evenly align-items-center">
+                                <?php
+                                echo '<button class="btn btn-primary"
+                                     data-bs-toggle="modal" data-bs-target="#modal-details" 
+                                     data-bs-type="' . $content['type'] . '"
+                                     data-bs-title="' . $content['title'] . '" 
+                                     data-bs-description="' . $content['description'] . '"
+                                     data-bs-due-date="' . $content['due_date'] . '"
+                                     data-bs-file-path="' . $content['file_path'] . '"
+                                     data-bs-file-name="' . $content['file_name'] . '"
+                                     data-bs-link="' . $content['link'] . '">Lihat</button>';
+                                ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex justify-content-evenly align-items-center">
+                                <?php
+                                if ($type == "professor") {
+                                    echo '<a href="course.php?id=' . $course_id . '" class="btn btn-primary">Submisi</a>';
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
+                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '">Hapus</button>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 

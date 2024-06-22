@@ -1,3 +1,13 @@
 .modal-body .btn {
     flex-grow: 1;
 }
+
+.div-card h4 {
+    border-radius: 10px;
+    border: 3px solid black;
+}
+
+.div-card .btn {
+    border-radius: 10px;
+    border: 2px solid white;
+}

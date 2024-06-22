@@ -53,7 +53,7 @@ $materials = "CREATE TABLE IF NOT EXISTS materials (
     description TEXT NOT NULL,
     file_path VARCHAR(255),
     file_name VARCHAR(255),
-    date_uploaded DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     owner_id VARCHAR(20) NOT NULL,
     FOREIGN KEY (course_id) REFERENCES courses(course_id),
     FOREIGN KEY (owner_id) REFERENCES users(user_id)
