@@ -55,8 +55,8 @@ modal_details.addEventListener('show.bs.modal', (e) => {
     if (file_path !== '') {
         let file_element = document.createElement('a');
         file_element.href = file_path;
-        file_element.download = file_name;
         file_element.textContent = file_name;
+        file_element.target = '_blank';
         modal_body.appendChild(file_element);
     }
 
