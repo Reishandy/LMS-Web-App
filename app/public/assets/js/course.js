@@ -100,8 +100,8 @@ form_add_assignment.addEventListener('submit', (e) => {
     let now = new Date();
 
     // Remove the time part from the date
-    now.setHours(0,0,0,0);
-    selectedDate.setHours(0,0,0,0);
+    now.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < now) {
         dueDateInput.setCustomValidity('Batas waktu tidak boleh sebelum dari hari ini');
@@ -135,8 +135,8 @@ form_add_test.addEventListener('submit', (e) => {
     let now = new Date()
 
     // Remove the time part from the date
-    now.setHours(0,0,0,0);
-    selectedDate.setHours(0,0,0,0);
+    now.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < now) {
         dueDateInput.setCustomValidity('Batas waktu tidak boleh sebelum dari hari ini');
@@ -240,8 +240,8 @@ edit_assignment_form.addEventListener('submit', (e) => {
     let now = new Date();
 
     // Remove the time part from the date
-    now.setHours(0,0,0,0);
-    selectedDate.setHours(0,0,0,0);
+    now.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < now) {
         dueDateInput.setCustomValidity('Batas waktu tidak boleh sebelum dari hari ini');
@@ -303,8 +303,8 @@ edit_test_form.addEventListener('submit', (e) => {
     let now = new Date();
 
     // Remove the time part from the date
-    now.setHours(0,0,0,0);
-    selectedDate.setHours(0,0,0,0);
+    now.setHours(0, 0, 0, 0);
+    selectedDate.setHours(0, 0, 0, 0);
 
     if (selectedDate < now) {
         dueDateInput.setCustomValidity('Batas waktu tidak boleh sebelum dari hari ini');
@@ -321,6 +321,40 @@ edit_test_form.addEventListener('submit', (e) => {
         }, 500);
     } else {
         edit_test_form.classList.add('was-validated');
+    }
+});
+
+// Submit assigment and modal
+let modal_submit_assignment = document.getElementById('modal-assigment-submit');
+modal_submit_assignment.addEventListener('show.bs.modal', (e) => {
+    let button = e.relatedTarget;
+    let id = button.getAttribute('data-bs-id');
+    let title = button.getAttribute('data-bs-title');
+
+    let title_input = modal_submit_assignment.querySelector('.modal-title');
+    let id_input = modal_submit_assignment.querySelector('#id-assigment-submit');
+
+    title_input.textContent = 'Kumpulkan ' + title;
+    id_input.value = id;
+});
+
+let form_submit_assignment = document.getElementById('form-assigment-submit');
+form_submit_assignment.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (form_submit_assignment.checkValidity()) {
+        // Change the button to loading state while the file is being uploaded
+        let button = form_submit_assignment.querySelector('button[type="submit"]');
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+
+        leave_page();
+        leave(document.getElementById('modal-assigment-submit'));
+
+        setTimeout(() => {
+            form_submit_assignment.submit();
+        }, 500);
+    } else {
+        form_submit_assignment.classList.add('was-validated');
     }
 });
 
@@ -341,4 +375,103 @@ modal_delete_in.addEventListener('show.bs.modal', (e) => {
     modal_body.textContent = 'Apakah anda yakin ingin menghapus ' + type + ' ' + title + '?';
     input_id.value = id;
     input_type.value = type;
+});
+
+// Submissions modal
+let modal_submissions = document.getElementById('modal-submissions');
+modal_submissions.addEventListener('show.bs.modal', (e) => {
+    let button = e.relatedTarget;
+    let id = button.getAttribute('data-bs-id');
+    let course_id = button.getAttribute('data-bs-course-id');
+    let type = button.getAttribute('data-bs-type');
+    let title = button.getAttribute('data-bs-title');
+    let all = button.getAttribute('data-bs-all');
+
+    let title_input = modal_submissions.querySelector('.modal-title');
+    let table = modal_submissions.querySelector("tbody")
+
+    title_input.textContent = 'Ssubmisi dari ' + type + ' ' + title;
+    table.innerHTML = '';
+
+    // call the ../../logic/course_inside/submissions_get.php to get the submissions using ajax
+    $.ajax({
+        url: '../../logic/course_inside/submissions_get.php',
+        type: 'POST',
+        data: {
+            id: id,
+            course_id: course_id,
+            type: type
+        },
+        success: function (response) {
+            // Parse the response
+            let submissions = JSON.parse(response);
+
+            // Sort submissions by date_submitted in descending order
+            submissions.sort((a, b) => new Date(b.date_submitted) - new Date(a.date_submitted));
+
+            if (all === 'false') {
+                // Track unique assignments to get the most recent ones
+                let unique_assignments = {};
+
+                // Filter out submissions, keeping only the most recent per user_id
+                submissions = submissions.filter(submission => {
+                    if (!unique_assignments[submission.user_id] ||
+                        new Date(submission.date_submitted) > new Date(unique_assignments[submission.user_id].date_submitted)) {
+                        unique_assignments[submission.user_id] = submission;
+                        return true;
+                    }
+                    return false;
+                });
+            }
+
+            // Add submissions to the table
+            submissions.forEach((submission, index) => {
+                let row = document.createElement('tr');
+
+                // Create cells for each field
+                let cell_no = document.createElement('td');
+                cell_no.textContent = index + 1;
+                row.appendChild(cell_no);
+
+                let cell_id = document.createElement('td');
+                cell_id.textContent = submission.user_id;
+                row.appendChild(cell_id);
+
+                let cell_name = document.createElement('td');
+                cell_name.textContent = submission.name;
+                row.appendChild(cell_name);
+
+                let cell_class = document.createElement('td');
+                cell_class.textContent = submission.class.toUpperCase();
+                row.appendChild(cell_class);
+
+                let cell_year = document.createElement('td');
+                cell_year.textContent = submission.year;
+                row.appendChild(cell_year);
+
+                let cell_date_submitted = document.createElement('td');
+                cell_date_submitted.textContent = submission.date_submitted;
+                row.appendChild(cell_date_submitted);
+
+                let cell_description = document.createElement('td');
+                cell_description.textContent = submission.description || 'N/A';
+                row.appendChild(cell_description);
+
+                let cell_file = document.createElement('td');
+                if (submission.file_path && submission.file_name) {
+                    let downloadLink = document.createElement('a');
+                    downloadLink.href = submission.file_path;
+                    downloadLink.textContent = submission.file_name;
+                    downloadLink.target = '_blank';
+                    cell_file.appendChild(downloadLink);
+                } else {
+                    cell_file.textContent = 'N/A';
+                }
+                row.appendChild(cell_file);
+
+                // Append the row to the table body
+                table.appendChild(row);
+            });
+        }
+    })
 });

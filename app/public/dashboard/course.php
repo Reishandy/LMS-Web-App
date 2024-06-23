@@ -133,7 +133,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-material-name">Nama materi</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama materi tidak valid.
                         </div>
                     </div>
 
@@ -183,7 +183,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-assigment-name">Nama tugas</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama tugas tidak valid.
                         </div>
                     </div>
 
@@ -242,7 +242,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-test-name">Nama tes</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama tes tidak valid.
                         </div>
                     </div>
 
@@ -306,7 +306,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-material-edit-name">Nama materi</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama materi tidak valid.
                         </div>
                     </div>
 
@@ -357,7 +357,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-assigment-edit-name">Nama tugas</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama tugas tidak valid.
                         </div>
                     </div>
 
@@ -417,7 +417,7 @@ $tests_count = $course_data['tests_count'];
                                placeholder="Nama" pattern=".{1,255}$" required>
                         <label for="modal-test-edit-name">Nama tes</label>
                         <div class="invalid-feedback">
-                            Nama kelas tidak valid.
+                            Nama tes tidak valid.
                         </div>
                     </div>
 
@@ -458,6 +458,46 @@ $tests_count = $course_data['tests_count'];
     </div>
 </div>
 
+<div class="modal fade" id="modal-assigment-submit" tabindex="-1" aria-labelledby="modal-assigment-submit-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-assigment-submit-label">Submit tugas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="form-assigment-submit" action="../../logic/course_inside/assigment_submit.php" method="POST"
+                  class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" value="<?php echo $id ?>">
+                    <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                    <input id="id-assigment-submit" type="hidden" name="assigment_id">
+
+                    <div class="form-floating mt-3">
+                        <textarea class="form-control" id="modal-assigment-submit-description" name="description"
+                                  placeholder="Deskripsi"></textarea>
+                        <label for="modal-assigment-submit-description">Deskripsi</label>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <input type="file" class="form-control" id="modal-assigment-file" name="file" accept="*/*"
+                               required>
+                        <label for="modal-material-file">Ukuran maksimum 10MB</label>
+                        <div class="invalid-feedback">
+                            File tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="modal-details" tabindex="-1" aria-labelledby="modal-details-label"
      aria-hidden="true">
@@ -469,6 +509,43 @@ $tests_count = $course_data['tests_count'];
             </div>
             <div class="modal-body">
 
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-submissions" tabindex="-1" aria-labelledby="modal-submissions-label"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-submissions-label">Submissions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">NIM</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Kelas</th>
+                                <th scope="col">Angkatan</th>
+                                <th scope="col">Tanggal dikerjakan</th>
+                                <th scope="col">Deskripsi</th>
+                                <th scope="col">File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="modal-footer">
@@ -577,7 +654,6 @@ $tests_count = $course_data['tests_count'];
 
     <!-- === COURSES === -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-        <!-- TODO: Rework, copy and modify from dashboard -->
         <?php
         $materials = get_materials($course_id);
         $assignments = get_assignments($course_id);
@@ -622,12 +698,52 @@ $tests_count = $course_data['tests_count'];
         }
 
         foreach ($contents as $content) {
+            // Due date for test and assignment
+            if ($content['type'] == 'Tugas' || $content['type'] == 'Tes') {
+                $due_date = strtotime($content['due_date']);
+                $now = time();
+                if ($due_date < $now) {
+                    $content['deadline'] = true;
+                }
+            }
+
+            // Check test marked
+            if ($content['type'] == 'Tes') {
+                $marked = is_test_marked($content['id'], $id);
+                if ($marked) {
+                    $content['deadline'] = true;
+                }
+            }
+
+            // Check assignment done
+            if ($content['type'] == 'Tugas') {
+                $marked = is_assignment_done($content['id'], $id);
+            }
             ?>
             <div class="p-3">
                 <div class="div-card p-3">
                     <div class="row">
                         <div class="col-5"><h4 class="p-1" style="background-color: <?php echo $content['color'] ?>">
-                                <?php echo $content['type'] ?></h4></div>
+                                <?php echo $content['type'] ?></h4>
+                        </div>
+                        <div class="col">
+                            <?php
+                            if ($marked) {
+                                if ($content['type'] == 'Tes') {
+                                    echo '<h4 class="p-1">Sudah selesai</h4>';
+                                } else {
+                                    echo '<h4 class="p-1">Sudah dikumpulkan</h4>';
+                                }
+                            } elseif ($content['deadline']) {
+                                echo '<h4 class="p-1">Terlewati</h4>';
+                            } else {
+                                if ($content['type'] == 'Tes')
+                                    echo '<h4 class="p-1">Belum selesai</h4>';
+                                elseif ($content['type'] == 'Tugas')
+                                    echo '<h4 class="p-1">Belum dikumpulkan</h4>';
+                            }
+                            ?>
+                        </div>
                     </div>
                     <h3><?php echo $content['title'] ?></h3>
                     <p><?php echo $content['description'] ?></p>
@@ -660,16 +776,86 @@ $tests_count = $course_data['tests_count'];
                                      data-bs-file-path="' . $content['file_path'] . '"
                                      data-bs-file-name="' . $content['file_name'] . '"
                                      data-bs-link="' . $content['link'] . '">Lihat</button>';
+                                if ($type == "professor") {
+                                    // submission list button
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-submissions" 
+                                          data-bs-id="' . $content['id'] . '"
+                                          data-bs-course-id="' . $course_id . '"
+                                          data-bs-type="' . $content['type'] . '"
+                                          data-bs-title="' . $content['title'] . '"
+                                          data-bs-all="false">Submisi</button>';
+                                }
                                 ?>
                             </div>
+                        </div>
+                        <div class="row">
+                            <?php
+                            if ($type == "student") {
+                                if ($content['type'] == "Tes") {
+                                    ?>
+                                    <form action="../../logic/course_inside/test_submit.php" method="post">
+                                        <input type="hidden" name="user_id" value="<?php echo $id ?>">
+                                        <input type="hidden" name="test_id" value="<?php echo $content['id'] ?>">
+                                        <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <button type="submit" class="btn btn-primary" <?php
+                                            if ($content['deadline']) {
+                                                echo 'disabled';
+                                            } ?>>
+                                                <?php
+                                                if ($marked) {
+                                                    echo 'Sudah tertandai';
+                                                } elseif ($content['deadline']) {
+                                                    echo 'Deadline terlewati';
+                                                } else {
+                                                    echo 'Tandai sudah';
+                                                }
+                                                ?>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <?php
+                                } elseif ($content['type'] == "Tugas") {
+                                    ?>
+                                    <div class="d-flex justify-content-evenly align-items-center">
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modal-assigment-submit"
+                                                data-bs-id="<?php echo $content['id'] ?>"
+                                                data-bs-title="<?php echo $content['title'] ?>"
+                                            <?php
+                                            if ($content['deadline']) {
+                                                echo 'disabled';
+                                            }
+                                            ?>>
+                                            <?php
+                                            if ($marked) {
+                                                echo 'Kumpulkan ulang';
+                                            } elseif ($content['deadline']) {
+                                                echo 'Deadline terlewati';
+                                            } else {
+                                                echo 'Kumpulkan';
+                                            }
+                                            ?>
+                                        </button>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </div>
                         <div class="row">
                             <div class="d-flex justify-content-evenly align-items-center">
                                 <?php
                                 if ($type == "professor") {
-                                    echo '<a href="course.php?id=' . $course_id . '" class="btn btn-primary">Submisi</a>';
+                                    // submission list all button
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-submissions" 
+                                          data-bs-id="' . $content['id'] . '"
+                                          data-bs-course-id="' . $course_id . '"
+                                          data-bs-type="' . $content['type'] . '"
+                                          data-bs-title="' . $content['title'] . '"
+                                          data-bs-all="true">Semua</button>';
                                     echo '<button class="btn btn-primary" data-bs-toggle="modal" 
-                                          data-bs-target="#'. $content['edit'] . '" 
+                                          data-bs-target="#' . $content['edit'] . '" 
                                           data-bs-id="' . $content['id'] . '"
                                           data-bs-type="' . $content['type'] . '"
                                           data-bs-title="' . $content['title'] . '" 
@@ -689,7 +875,9 @@ $tests_count = $course_data['tests_count'];
                     </div>
                 </div>
             </div>
-        <?php } ?>
+            <?php
+            $marked = false;
+        } ?>
     </div>
 </div>
 
@@ -703,8 +891,8 @@ $tests_count = $course_data['tests_count'];
 
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

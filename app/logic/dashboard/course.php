@@ -106,3 +106,41 @@ function get_tests($course_id): false|array|null
 
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+
+// Check if test is marked
+function is_test_marked($test_id, $user_id): bool
+{
+    global $conn;
+
+    $query = "SELECT * FROM submissions WHERE test_id = ? AND user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $test_id, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    if ($result->num_rows == 0) {
+        return false;
+    }
+
+    return true;
+}
+
+// Check if assigment is done
+function is_assignment_done($assignment_id, $user_id): bool
+{
+    global $conn;
+
+    $query = "SELECT * FROM submissions WHERE assignment_id = ? AND user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $assignment_id, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+
+    if ($result->num_rows == 0) {
+        return false;
+    }
+
+    return true;
+}

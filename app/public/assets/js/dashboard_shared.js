@@ -81,3 +81,33 @@ logout.addEventListener('click', () => {
         window.location.href = '../../logic/auth/logout.php';
     }, 500);
 });
+
+// Switch div-details classes
+function switch_details() {
+    let details = document.getElementsByClassName('div-details')[0];
+    let row = details.querySelector('.row');
+    let col = row.querySelector('.col');
+    let col7 = row.querySelector('.col-7');
+
+    if (window.innerWidth < 600) {
+        row.classList.remove('row');
+        col.classList.remove('col');
+        row.classList.add('col');
+        col.classList.add('row');
+        col7.classList.remove('col-7');
+        col7.classList.add('col');
+    } else {
+        row.classList.add('row');
+        col.classList.add('col');
+        col.classList.remove('row');
+        row.classList.remove('col');
+        col7.classList.add('col-7');
+        col7.classList.remove('col');
+    }
+}
+switch_details();
+
+// Onresize
+window.addEventListener('resize', () => {
+    switch_details();
+});

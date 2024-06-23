@@ -6,8 +6,25 @@ $item_id = $_POST['id'];
 $item_type = $_POST['type'];
 $course_id = $_POST['course_id'];
 
-var_dump($_POST);
+// Delete the uploaded file
+if ($item_type == "Materi") {
+    $query_select = "SELECT file_path FROM materials WHERE material_id = ?";
+} else if ($item_type == "Tugas") {
+    $query_select = "SELECT file_path FROM assignments WHERE assignment_id = ?";
+}
 
+$stmt = $conn->prepare($query_select);
+$stmt->bind_param("i", $item_id);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($file_path);
+$stmt->fetch();
+
+if ($file_path != null) {
+    unlink($file_path);
+}
+
+$stmt->close();
 // Delete depending on the type of item
 if ($item_type == "Materi") {
     $query_delete = "DELETE FROM materials WHERE material_id = ?";

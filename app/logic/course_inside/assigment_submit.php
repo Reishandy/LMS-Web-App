@@ -3,14 +3,11 @@ require_once "../../logic/connection.php";
 
 // Get the data
 $course_id = $_POST['course_id'];
-$owner_id = $_POST['owner_id'];
-$title = $_POST['name'];
-$description = $_POST['description'];
-$due_date = $_POST['due_date'];
-$file_path = null;
-$file_name = null;
+$user_id = $_POST['user_id'];
+$assigment_id = $_POST['assigment_id'];
+$description = $_POST['description'] == "" ? null : $_POST['description'];
 
-// Check the file is uploaded
+// Check the file
 if (isset($_FILES['file']) && $_FILES['file']['size'] > 0){
     $file = $_FILES['file'];
     $file_name = $file['name'];
@@ -24,7 +21,7 @@ if (isset($_FILES['file']) && $_FILES['file']['size'] > 0){
     }
 
     // Define the directory to save the file
-    $upload_dir = "../../uploads/assignments/";
+    $upload_dir = "../../uploads/submissions/";
 
     // Create the directory if it doesn't exist
     if (!is_dir($upload_dir)) {
@@ -41,15 +38,18 @@ if (isset($_FILES['file']) && $_FILES['file']['size'] > 0){
     }
 
     $file_path = $upload_dir . $file_name_path;
+} else {
+    echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&error=File tidak ditemukan") </script>';
+    exit();
 }
 
 // Insert the data to the database
-$query = "INSERT INTO assignments (course_id, title, description, file_path, file_name, due_date, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO submissions (assignment_id, user_id, description, file_path, file_name) VALUES (?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("sssssss", $course_id, $title, $description, $file_path, $file_name, $due_date, $owner_id);
+$stmt->bind_param("sssss", $assigment_id, $user_id, $description, $file_path, $file_name);
 $stmt->execute();
 $stmt->close();
 
 // Redirect to course page
-echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil menambahkan ' . $title . '") </script>';
+echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil mengumpulkan tugas") </script>';
 exit();
