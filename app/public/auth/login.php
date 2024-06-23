@@ -25,7 +25,7 @@
         <h1 class="mt-4">MASUK</h1>
 
         <div class="m-5">
-            <form action="#" method="POST" class="needs-validation" novalidate>
+            <form action="../../logic/auth/login.php" method="POST" class="needs-validation" novalidate>
 
                 <?php
                 if (isset($_GET['error']) && $_GET['error'] == 'username') {

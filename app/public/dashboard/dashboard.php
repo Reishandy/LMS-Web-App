@@ -79,7 +79,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-add" action="#" method="POST" class="needs-validation" novalidate>
+            <form id="form-add" action="../../logic/course/add.php" method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
 
@@ -119,7 +119,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-join" action="#" method="POST" class="needs-validation"
+            <form id="form-join" action="../../logic/course/enroll.php" method="POST" class="needs-validation"
                   novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="user_id" value="<?php echo $id ?>">
@@ -158,7 +158,7 @@ $year = $user['year'];
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
 
-                <form id="form-delete" action="#" method="POST">
+                <form id="form-delete" action="../../logic/course/delete.php" method="POST">
                     <input type="hidden" name="course_id" id="course-id-delete">
                     <button id="delete" type="submit" class="btn btn-outline-danger">Hapus</button>
                 </form>
@@ -175,7 +175,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-edit" action="#" method="POST" class="needs-validation" novalidate>
+            <form id="form-edit" action="../../logic/course/edit.php" method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="course_id" id="course-id-edit">
 

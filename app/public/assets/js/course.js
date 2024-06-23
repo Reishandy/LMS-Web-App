@@ -65,7 +65,6 @@ modal_details.addEventListener('show.bs.modal', (e) => {
         let link_button = document.createElement('a');
         link_button.href = link;
         link_button.textContent = 'Link test';
-        link_button.target = '_blank';
         modal_body.appendChild(link_button);
     }
 });
