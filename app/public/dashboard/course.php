@@ -122,7 +122,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-material" action="../../logic/course_inside/material_add.php" method="POST"
+            <form id="form-material" action="#" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -172,7 +172,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-assigment" action="../../logic/course_inside/assigment_add.php" method="POST"
+            <form id="form-assigment" action="#" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -231,7 +231,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-test" action="../../logic/course_inside/test_add.php" method="POST"
+            <form id="form-test" action="#" method="POST"
                   class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -294,7 +294,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-material-edit" action="../../logic/course_inside/material_edit.php" method="POST"
+            <form id="form-material-edit" action="#" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -345,7 +345,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-assigment-edit" action="../../logic/course_inside/assigment_edit.php" method="POST"
+            <form id="form-assigment-edit" action="#" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -405,7 +405,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-test-edit" action="../../logic/course_inside/test_edit.php" method="POST"
+            <form id="form-test-edit" action="#" method="POST"
                   class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="owner_id" value="<?php echo $id ?>">
@@ -467,7 +467,7 @@ $tests_count = $course_data['tests_count'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-assigment-submit" action="../../logic/course_inside/assigment_submit.php" method="POST"
+            <form id="form-assigment-submit" action="#" method="POST"
                   class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="user_id" value="<?php echo $id ?>">
@@ -575,7 +575,7 @@ $tests_count = $course_data['tests_count'];
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
 
-                <form id="form-delete" action="../../logic/course_inside/in_delete.php" method="POST">
+                <form id="form-delete" action="#" method="POST">
                     <input type="hidden" name="id" id="id-delete-in">
                     <input type="hidden" name="type" id="type-delete-in">
                     <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
@@ -803,7 +803,7 @@ $tests_count = $course_data['tests_count'];
                             if ($type == "student") {
                                 if ($content['type'] == "Tes") {
                                     ?>
-                                    <form id="form-test-submit" action="../../logic/course_inside/test_submit.php"
+                                    <form id="form-test-submit" action="#"
                                           method="post">
                                         <input type="hidden" name="user_id" value="<?php echo $id ?>">
                                         <input type="hidden" name="test_id" value="<?php echo $content['id'] ?>">

@@ -25,7 +25,7 @@
         <h1 class="mt-4">DAFTAR</h1>
 
         <div class="m-5">
-            <form action="../../logic/auth/register.php" method="POST" class="needs-validation" novalidate>
+            <form action="#" method="POST" class="needs-validation" novalidate>
 
                 <?php
                 if (isset($_GET['error']) && $_GET['error'] == 'taken') {
