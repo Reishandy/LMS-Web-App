@@ -698,6 +698,7 @@ $tests_count = $course_data['tests_count'];
         }
 
         foreach ($contents as $content) {
+            $content['deadline'] = false;
             // Due date for test and assignment
             if ($content['type'] == 'Tugas' || $content['type'] == 'Tes') {
                 $due_date = strtotime($content['due_date']);
@@ -708,6 +709,8 @@ $tests_count = $course_data['tests_count'];
             }
 
             // Check test marked
+            $marked = false;
+            $deadline = false;
             if ($content['type'] == 'Tes') {
                 $marked = is_test_marked($content['id'], $id);
                 if ($marked) {
@@ -876,7 +879,6 @@ $tests_count = $course_data['tests_count'];
                 </div>
             </div>
             <?php
-            $marked = false;
         } ?>
     </div>
 </div>
