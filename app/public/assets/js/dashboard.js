@@ -7,12 +7,23 @@ form_add.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (form_add.checkValidity()) {
-        leave_page();
-        leave(document.getElementById('modal-add'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course/add.php',
+            data: {
+                'owner_id': document.getElementsByName('owner_id').item(0).value,
+                'name': document.getElementById('name').value,
+                'description': document.getElementById('description').value
+            },
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-add'));
 
-        setTimeout(() => {
-            form_add.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_add.classList.add('was-validated');
     }
@@ -24,12 +35,22 @@ form_join.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (form_join.checkValidity()) {
-        leave_page();
-        leave(document.getElementById('modal-join'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course/enroll.php',
+            data: {
+                'user_id': document.getElementsByName('user_id').item(0).value,
+                'course_id': document.getElementById('course-id').value
+            },
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-join'));
 
-        setTimeout(() => {
-            form_join.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_join.classList.add('was-validated');
     }
@@ -53,6 +74,22 @@ modal_delete.addEventListener('show.bs.modal' , (e) => {
 let form_delete = document.getElementById('form-delete');
 form_delete.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '../../logic/course/delete.php',
+        data: {
+            'course_id': document.getElementById('course-id-delete').value
+        },
+        success: (response) => {
+            leave_page();
+            leave(modal_delete);
+
+            setTimeout(() => {
+                window.location.replace(response);
+            }, 500);
+        }
+    });
 
     leave_page();
     leave(modal_delete);
@@ -84,4 +121,31 @@ modal_edit.addEventListener('show.bs.modal', (e) => {
     setTimeout(() => {
         course_description.dispatchEvent(new Event('input'));
     }, 500);
+});
+
+let form_edit = document.getElementById('form-edit');
+form_edit.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (form_edit.checkValidity()) {
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course/edit.php',
+            data: {
+                'course_id': document.getElementById('course-id-edit').value,
+                'name': document.getElementById('edit-name').value,
+                'description': document.getElementById('edit-description').value
+            },
+            success: (response) => {
+                leave_page();
+                leave(modal_edit);
+
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
+    } else {
+        form_edit.classList.add('was-validated');
+    }
 });

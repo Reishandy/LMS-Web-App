@@ -77,14 +77,23 @@ form_add_material.addEventListener('submit', (e) => {
     if (form_add_material.checkValidity()) {
         // Change the button to loading state while the file is being uploaded
         let button = form_add_material.querySelector('button[type="submit"]');
-        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
 
-        leave_page();
-        leave(document.getElementById('modal-material'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/material_add.php',
+            data: new FormData(form_add_material),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-material'));
 
-        setTimeout(() => {
-            form_add_material.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_add_material.classList.add('was-validated');
     }
@@ -112,14 +121,23 @@ form_add_assignment.addEventListener('submit', (e) => {
     if (form_add_assignment.checkValidity()) {
         // Change the button to loading state while the file is being uploaded
         let button = form_add_assignment.querySelector('button[type="submit"]');
-        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
 
-        leave_page();
-        leave(document.getElementById('modal-assigment'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/assigment_add.php',
+            data: new FormData(form_add_assignment),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-assigment'));
 
-        setTimeout(() => {
-            form_add_assignment.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_add_assignment.classList.add('was-validated');
     }
@@ -145,12 +163,21 @@ form_add_test.addEventListener('submit', (e) => {
     }
 
     if (form_add_test.checkValidity()) {
-        leave_page();
-        leave(document.getElementById('modal-test'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/test_add.php',
+            data: new FormData(form_add_test),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-test'));
 
-        setTimeout(() => {
-            form_add_test.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_add_test.classList.add('was-validated');
     }
@@ -189,14 +216,23 @@ edit_material_form.addEventListener('submit', (e) => {
     if (edit_material_form.checkValidity()) {
         // Change the button to loading state while the file is being uploaded
         let button = edit_material_form.querySelector('button[type="submit"]');
-        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
 
-        leave_page();
-        leave(document.getElementById('modal-material-edit'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/material_edit.php',
+            data: new FormData(edit_material_form),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-material-edit'));
 
-        setTimeout(() => {
-            edit_material_form.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         edit_material_form.classList.add('was-validated');
     }
@@ -252,14 +288,23 @@ edit_assignment_form.addEventListener('submit', (e) => {
     if (edit_assignment_form.checkValidity()) {
         // Change the button to loading state while the file is being uploaded
         let button = edit_assignment_form.querySelector('button[type="submit"]');
-        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
 
-        leave_page();
-        leave(document.getElementById('modal-assigment-edit'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/assigment_edit.php',
+            data: new FormData(edit_assignment_form),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-assigment-edit'));
 
-        setTimeout(() => {
-            edit_assignment_form.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         edit_assignment_form.classList.add('was-validated');
     }
@@ -313,12 +358,21 @@ edit_test_form.addEventListener('submit', (e) => {
     }
 
     if (edit_test_form.checkValidity()) {
-        leave_page();
-        leave(document.getElementById('modal-test-edit'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/test_edit.php',
+            data: new FormData(edit_test_form),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-test-edit'));
 
-        setTimeout(() => {
-            edit_test_form.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         edit_test_form.classList.add('was-validated');
     }
@@ -345,16 +399,55 @@ form_submit_assignment.addEventListener('submit', (e) => {
     if (form_submit_assignment.checkValidity()) {
         // Change the button to loading state while the file is being uploaded
         let button = form_submit_assignment.querySelector('button[type="submit"]');
-        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Uploading...';
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
 
-        leave_page();
-        leave(document.getElementById('modal-assigment-submit'));
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/assigment_submit.php',
+            data: new FormData(form_submit_assignment),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-assigment-submit'));
 
-        setTimeout(() => {
-            form_submit_assignment.submit();
-        }, 500);
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
     } else {
         form_submit_assignment.classList.add('was-validated');
+    }
+});
+
+// Submit test
+let form_submit_test = document.getElementById('form-test-submit');
+form_submit_test.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (form_submit_test.checkValidity()) {
+        // Change the button to loading state while the file is being uploaded
+        let button = form_submit_test.querySelector('button[type="submit"]');
+        button.innerHTML = ' <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Mengunggah...';
+
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/course_inside/test_submit.php',
+            data: new FormData(form_submit_test),
+            processData: false,
+            contentType: false,
+            success: (response) => {
+                leave_page();
+                leave(document.getElementById('modal-test-submit'));
+
+                setTimeout(() => {
+                    window.location.replace(response);
+                }, 500);
+            }
+        });
+    } else {
+        form_submit_test.classList.add('was-validated');
     }
 });
 
@@ -376,6 +469,26 @@ modal_delete_in.addEventListener('show.bs.modal', (e) => {
     input_id.value = id;
     input_type.value = type;
 });
+let form_delete_in = document.getElementById('form-delete');
+form_delete_in.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    $.ajax({
+        type: 'POST',
+        url: '../../logic/course_inside/in_delete.php',
+        data: new FormData(form_delete_in),
+        processData: false,
+        contentType: false,
+        success: (response) => {
+            leave_page();
+            leave(document.getElementById('modal-delete-in'));
+
+            setTimeout(() => {
+                window.location.replace(response);
+            }, 500);
+        }
+    });
+});
 
 // Submissions modal
 let modal_submissions = document.getElementById('modal-submissions');
@@ -389,9 +502,11 @@ modal_submissions.addEventListener('show.bs.modal', (e) => {
 
     let title_input = modal_submissions.querySelector('.modal-title');
     let table = modal_submissions.querySelector("tbody")
+    let spinner = modal_submissions.querySelector('#spinner');
 
     title_input.textContent = 'Ssubmisi dari ' + type + ' ' + title;
     table.innerHTML = '';
+    spinner.style.opacity = 1;
 
     // call the ../../logic/course_inside/submissions_get.php to get the submissions using ajax
     $.ajax({
@@ -423,6 +538,9 @@ modal_submissions.addEventListener('show.bs.modal', (e) => {
                     return false;
                 });
             }
+
+            // Hide the spinner
+            spinner.style.opacity = 0;
 
             // Add submissions to the table
             submissions.forEach((submission, index) => {

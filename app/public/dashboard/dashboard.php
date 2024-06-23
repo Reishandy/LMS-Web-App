@@ -119,7 +119,8 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-join" action="../../logic/course/enroll.php" method="POST" class="needs-validation" novalidate>
+            <form id="form-join" action="../../logic/course/enroll.php" method="POST" class="needs-validation"
+                  novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="user_id" value="<?php echo $id ?>">
 
@@ -174,7 +175,7 @@ $year = $user['year'];
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form id="form-add" action="../../logic/course/edit.php" method="POST" class="needs-validation" novalidate>
+            <form id="form-edit" action="../../logic/course/edit.php" method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <input type="hidden" name="course_id" id="course-id-edit">
 
@@ -264,7 +265,7 @@ $year = $user['year'];
             Gagal bergabung ke kelas, <?php echo $_GET['enroll_error'] ?>
         </div>
         <?php
-    }  elseif (isset($_GET['delete'])) {
+    } elseif (isset($_GET['delete'])) {
         ?>
         <div class="alert alert-success" role="alert">
             Kelas <?php echo $_GET['delete'] ?> berhasil dihapus.
@@ -342,8 +343,8 @@ $year = $user['year'];
                                 <a href="course.php?id=<?php echo $course_id ?>" class="btn btn-primary">Masuk</a>
                                 <?php
                                 if ($type == "professor") {
-                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
-                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-id="' . $course_id .'" data-bs-name="' . $course_name . '">Hapus</button>';
+                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '" data-bs-description="' . $course_description . '">Edit</button>';
+                                    echo '<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-id="' . $course_id . '" data-bs-name="' . $course_name . '">Hapus</button>';
                                 }
 
                                 ?>
@@ -368,8 +369,8 @@ $year = $user['year'];
 
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

@@ -33,7 +33,7 @@ if ($item_type == "Materi") {
 } else if ($item_type == "Tes") {
     $query_delete = "DELETE FROM tests WHERE test_id = ?";
 } else {
-    echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&error=invalid_item_type") </script>';
+    echo '../../public/dashboard/course.php?id=' . $course_id . '&&error=invalid_item_type';
     exit();
 }
 
@@ -51,5 +51,5 @@ if ($item_type == "Tugas" || $item_type == "Tes") {
     $stmt->close();
 }
 
-echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&success=' . $item_type . ' berhasil dihapus") </script>';
+echo '../../public/dashboard/course.php?id=' . $course_id . '&&success=' . $item_type . ' berhasil dihapus';
 exit();

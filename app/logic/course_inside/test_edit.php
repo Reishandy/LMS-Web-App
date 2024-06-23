@@ -18,5 +18,5 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to course page
-echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil mengedit ' . $title . '") </script>';
+echo '../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil mengubah  ' . $title;
 exit();

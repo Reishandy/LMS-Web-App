@@ -520,7 +520,7 @@ $tests_count = $course_data['tests_count'];
 
 <div class="modal fade" id="modal-submissions" tabindex="-1" aria-labelledby="modal-submissions-label"
      aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-submissions-label">Submissions</h5>
@@ -530,21 +530,26 @@ $tests_count = $course_data['tests_count'];
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">NIM</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Angkatan</th>
-                                <th scope="col">Tanggal dikerjakan</th>
-                                <th scope="col">Deskripsi</th>
-                                <th scope="col">File</th>
-                            </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NIM</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Kelas</th>
+                            <th scope="col">Angkatan</th>
+                            <th scope="col">Tanggal dikerjakan</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">File</th>
+                        </tr>
                         </thead>
                         <tbody>
 
                         </tbody>
                     </table>
+                    <div id="spinner" class="d-flex justify-content-center align-items-center">
+                        <div class="spinner-grow text-secondary p-4" role="status">
+                            <span class="visually-hidden">Memuat...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -731,19 +736,21 @@ $tests_count = $course_data['tests_count'];
                         </div>
                         <div class="col">
                             <?php
-                            if ($marked) {
-                                if ($content['type'] == 'Tes') {
-                                    echo '<h4 class="p-1">Sudah selesai</h4>';
+                            if ($type != "professor") {
+                                if ($marked) {
+                                    if ($content['type'] == 'Tes') {
+                                        echo '<h4 class="p-1">Sudah selesai</h4>';
+                                    } else {
+                                        echo '<h4 class="p-1">Sudah dikumpulkan</h4>';
+                                    }
+                                } elseif ($content['deadline']) {
+                                    echo '<h4 class="p-1">Terlewati</h4>';
                                 } else {
-                                    echo '<h4 class="p-1">Sudah dikumpulkan</h4>';
+                                    if ($content['type'] == 'Tes')
+                                        echo '<h4 class="p-1">Belum selesai</h4>';
+                                    elseif ($content['type'] == 'Tugas')
+                                        echo '<h4 class="p-1">Belum dikumpulkan</h4>';
                                 }
-                            } elseif ($content['deadline']) {
-                                echo '<h4 class="p-1">Terlewati</h4>';
-                            } else {
-                                if ($content['type'] == 'Tes')
-                                    echo '<h4 class="p-1">Belum selesai</h4>';
-                                elseif ($content['type'] == 'Tugas')
-                                    echo '<h4 class="p-1">Belum dikumpulkan</h4>';
                             }
                             ?>
                         </div>
@@ -779,7 +786,7 @@ $tests_count = $course_data['tests_count'];
                                      data-bs-file-path="' . $content['file_path'] . '"
                                      data-bs-file-name="' . $content['file_name'] . '"
                                      data-bs-link="' . $content['link'] . '">Lihat</button>';
-                                if ($type == "professor") {
+                                if ($type == "professor" && $content['type'] != "Materi") {
                                     // submission list button
                                     echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-submissions" 
                                           data-bs-id="' . $content['id'] . '"
@@ -796,7 +803,8 @@ $tests_count = $course_data['tests_count'];
                             if ($type == "student") {
                                 if ($content['type'] == "Tes") {
                                     ?>
-                                    <form action="../../logic/course_inside/test_submit.php" method="post">
+                                    <form id="form-test-submit" action="../../logic/course_inside/test_submit.php"
+                                          method="post">
                                         <input type="hidden" name="user_id" value="<?php echo $id ?>">
                                         <input type="hidden" name="test_id" value="<?php echo $content['id'] ?>">
                                         <input type="hidden" name="course_id" value="<?php echo $course_id ?>">
@@ -843,6 +851,10 @@ $tests_count = $course_data['tests_count'];
                                     </div>
                                     <?php
                                 }
+                            } else {
+                                ?>
+                                <form id="form-test-submit" action="#" method="post"></form>
+                                <?php
                             }
                             ?>
                         </div>
@@ -851,12 +863,14 @@ $tests_count = $course_data['tests_count'];
                                 <?php
                                 if ($type == "professor") {
                                     // submission list all button
-                                    echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-submissions" 
+                                    if ($content['type'] != "Materi") {
+                                        echo '<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-submissions" 
                                           data-bs-id="' . $content['id'] . '"
                                           data-bs-course-id="' . $course_id . '"
                                           data-bs-type="' . $content['type'] . '"
                                           data-bs-title="' . $content['title'] . '"
                                           data-bs-all="true">Semua</button>';
+                                    }
                                     echo '<button class="btn btn-primary" data-bs-toggle="modal" 
                                           data-bs-target="#' . $content['edit'] . '" 
                                           data-bs-id="' . $content['id'] . '"

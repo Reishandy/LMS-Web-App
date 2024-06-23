@@ -13,7 +13,7 @@ $stmt->bind_param("s", $course_id);
 $stmt->execute();
 
 if ($stmt->get_result()->num_rows == 0) {
-    echo '<script>window.location.replace("../../public/dashboard/dashboard.php?error=course_not_found") </script>';
+    echo '../../public/dashboard/dashboard.php?error=course_not_found';
     exit();
 }
 $stmt->close();
@@ -26,5 +26,5 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to dashboard
-echo '<script>window.location.replace("../../public/dashboard/dashboard.php?edit=' . $course_name . '") </script>';
+echo '../../public/dashboard/dashboard.php?edit=' . $course_name;
 exit();

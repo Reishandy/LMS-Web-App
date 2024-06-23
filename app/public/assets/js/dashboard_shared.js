@@ -74,12 +74,18 @@ function leave_page(element) {
 // Logout
 let logout = document.getElementById('logout');
 logout.addEventListener('click', () => {
-    leave(document.getElementById('modal-logout'));
+    $.ajax({
+        type: 'POST',
+        url: '../../logic/auth/logout.php',
+        success: (response) => {
+            leave(document.getElementById('modal-logout'));
+            leave_page();
 
-    leave_page();
-    setTimeout(() => {
-        window.location.href = '../../logic/auth/logout.php';
-    }, 500);
+            setTimeout(() => {
+                window.location.replace(response);
+            }, 500);
+        }
+    });
 });
 
 // Switch div-details classes

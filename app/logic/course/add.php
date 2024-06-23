@@ -32,7 +32,7 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to dashboard
-echo '<script>window.location.replace("../../public/dashboard/dashboard.php?add=' . $course_id . '") </script>';
+echo '../../public/dashboard/dashboard.php?add=' . $course_id;
 exit();
 
 function generate_course_id(): string

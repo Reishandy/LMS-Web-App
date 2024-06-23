@@ -52,10 +52,21 @@ form_login.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (form_login.checkValidity()) {
-        leave(document.getElementsByClassName('div-form')[0]);
-        setTimeout(() => {
-            form_login.submit();
-        }, 500);
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/auth/login.php',
+            data: {
+                'nim-nip': document.getElementById('nim-nip').value,
+                'password': document.getElementById('password').value,
+                'account': document.getElementById('account').value
+            },
+            success: (response) => {
+                leave(document.getElementsByClassName('div-form')[0]);
+                setTimeout(() => {
+                    window.location.replace(response)
+                }, 500);
+            }
+        });
     } else {
         form_login.classList.add('was-validated');
     }

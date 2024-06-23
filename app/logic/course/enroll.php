@@ -12,7 +12,7 @@ $stmt->bind_param("s", $course_id);
 $stmt->execute();
 
 if ($stmt->get_result()->num_rows == 0) {
-    echo '<script>window.location.replace("../../public/dashboard/dashboard.php?enroll_error=tidak ditemukan") </script>';
+    echo '../../public/dashboard/dashboard.php?enroll_error=tidak ditemukan';
     $stmt->close();
     exit();
 }
@@ -24,7 +24,7 @@ $stmt->bind_param("ss", $user_id, $course_id);
 $stmt->execute();
 
 if ($stmt->get_result()->num_rows > 0) {
-    echo '<script>window.location.replace("../../public/dashboard/dashboard.php?enroll_error=sudah terdaftar") </script>';
+    echo '../../public/dashboard/dashboard.php?enroll_error=sudah terdaftar';
     $stmt->close();
     exit();
 }
@@ -38,5 +38,5 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to dashboard
-echo '<script>window.location.replace("../../public/dashboard/dashboard.php?enroll=' . $course_id . '") </script>';
+echo '../../public/dashboard/dashboard.php?enroll=' . $course_id;
 exit();

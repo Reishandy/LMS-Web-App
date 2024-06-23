@@ -145,10 +145,26 @@ form_register.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (form_register.checkValidity()) {
-        leave(document.getElementsByClassName('div-form')[0]);
-        setTimeout(() => {
-            form_register.submit();
-        }, 500);
+        $.ajax({
+            type: 'POST',
+            url: '../../logic/auth/register.php',
+            data: {
+                'nim-nip': document.getElementById('nim-nip').value,
+                'name': document.getElementById('name').value,
+                'email': document.getElementById('email').value,
+                'prodi': document.getElementById('prodi').value,
+                'password': document.getElementById('password').value,
+                'account': document.getElementById('account').value,
+                'class': document.getElementById('class').value,
+                'year': document.getElementById('year').value
+            },
+            success: (response) => {
+                leave(document.getElementsByClassName('div-form')[0]);
+                setTimeout(() => {
+                    window.location.replace(response)
+                }, 500);
+            }
+        });
     } else {
         form_register.classList.add('was-validated');
     }

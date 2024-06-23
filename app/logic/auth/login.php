@@ -14,7 +14,7 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 if ($result->num_rows == 0) {
-    echo '<script>window.location.replace("../../public/auth/login.php?error=username") </script>';
+    echo '../../public/auth/login.php?error=username';
     $stmt->close();
     exit();
 }
@@ -23,7 +23,7 @@ if ($result->num_rows == 0) {
 $hashed_password = $result->fetch_assoc()['password'];
 $stmt->close();
 if (!password_verify($password, $hashed_password)) {
-    echo '<script>window.location.replace("../../public/auth/login.php?error=password") </script>';
+    echo '../../public/auth/login.php?error=password';
     exit();
 }
 
@@ -34,4 +34,4 @@ $_SESSION['id'] = $nim_nip;
 $_SESSION['expire'] = time() + 10800;
 
 // Redirect to the dashboard
-echo '<script>window.location.replace("../../public/dashboard/dashboard.php") </script>';
+echo '../../public/dashboard/dashboard.php';

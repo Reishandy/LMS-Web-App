@@ -18,7 +18,7 @@ $stmt->bind_param("s", $nim_nip);
 $stmt->execute();
 
 if ($stmt->get_result()->num_rows > 0) {
-    echo '<script>window.location.replace("../../public/auth/register.php?error=taken") </script>';
+    echo '../../public/auth/register.php?error=taken';
     $stmt->close();
     exit();
 }
@@ -35,5 +35,5 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to login page
-echo '<script>window.location.replace("../../public/auth/login.php?success=true") </script>';
+echo '../../public/auth/login.php?success=true';
 exit();

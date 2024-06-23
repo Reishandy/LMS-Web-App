@@ -16,7 +16,7 @@ if (isset($_FILES['file']) && $_FILES['file']['size'] > 0){
 
     // Check the file size (max 10MB)
     if ($file_size > 10000000) {
-        echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&error=Ukuran file tidak boleh melebihi 10MB") </script>';
+        echo '../../public/dashboard/course.php?id=' . $course_id . '&&error=Ukuran file tidak boleh melebihi 10MB';
         exit();
     }
 
@@ -33,13 +33,13 @@ if (isset($_FILES['file']) && $_FILES['file']['size'] > 0){
 
     // Move the file to the directory
     if (!move_uploaded_file($file_tmp, $upload_dir . $file_name_path)) {
-        echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&error=Terjadi kesalahan saat mengunggah file") </script>';
+        echo '../../public/dashboard/course.php?id=' . $course_id . '&&error=Terjadi kesalahan saat mengunggah file';
         exit();
     }
 
     $file_path = $upload_dir . $file_name_path;
 } else {
-    echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&error=File tidak ditemukan") </script>';
+    echo '../../public/dashboard/course.php?id=' . $course_id . '&&error=File tidak ditemukan';
     exit();
 }
 
@@ -51,5 +51,5 @@ $stmt->execute();
 $stmt->close();
 
 // Redirect to course page
-echo '<script>window.location.replace("../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil mengumpulkan tugas") </script>';
+echo '../../public/dashboard/course.php?id=' . $course_id . '&&success=Berhasil mengumpulkan tugas';
 exit();

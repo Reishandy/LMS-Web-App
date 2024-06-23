@@ -3,4 +3,4 @@
 session_start();
 session_destroy();
 
-echo '<script>window.location.replace("../../public/auth/login.php?logout=true") </script>';
+echo '../../public/auth/login.php?logout=true';
